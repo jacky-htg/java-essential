@@ -2,9 +2,282 @@ Object Oriented Programming Di Java.
 Terdiri dari beberapa konsep:
 
 1.Class
+A class is a user defined blueprint or prototype from which objects are created.  
+It represents the set of properties or methods that are common to all objects of one type. 
+In general, class declarations can include these components, in order:
+ - Modifiers : A class can be public or has default access (Refer this for details).
+ - Class name: The name should begin with a initial letter (capitalized by convention).
+ - Superclass(if any): The name of the class’s parent (superclass), if any, preceded by the keyword extends. A class can only extend (subclass) one parent.
+ - Interfaces(if any): A comma-separated list of interfaces implemented by the class, if any, preceded by the keyword implements. A class can implement more than one interface.
+ - Body: The class body surrounded by braces, { }.
+Constructors are used for initializing new objects. 
+Fields are variables that provides the state of the class and its objects, and methods are used to implement the behavior of the class and its objects.
 2.Object
+It is a basic unit of Object Oriented Programming and represents the real life entities.  
+A typical Java program creates many objects, which as you know, interact by invoking methods. An object consists of :
+ - State : It is represented by attributes of an object. It also reflects the properties of an object.
+ - Behavior : It is represented by methods of an object. It also reflects the response of an object with other objects.
+ - Identity : It gives a unique name to an object and enables one object to interact with other objects.
+ // Class Declaration 
+  
+public class Dog 
+{ 
+    // Instance Variables 
+    String name; 
+    String breed; 
+    int age; 
+    String color; 
+  
+    // Constructor Declaration of Class 
+    public Dog(String name, String breed, 
+                   int age, String color) 
+    { 
+        this.name = name; 
+        this.breed = breed; 
+        this.age = age; 
+        this.color = color; 
+    } 
+  
+    // method 1 
+    public String getName() 
+    { 
+        return name; 
+    } 
+  
+    // method 2 
+    public String getBreed() 
+    { 
+        return breed; 
+    } 
+  
+    // method 3 
+    public int getAge() 
+    { 
+        return age; 
+    } 
+  
+    // method 4 
+    public String getColor() 
+    { 
+        return color; 
+    } 
+  
+    @Override
+    public String toString() 
+    { 
+        return("Hi my name is "+ this.getName()+ 
+               ".\nMy breed,age and color are " + 
+               this.getBreed()+"," + this.getAge()+ 
+               ","+ this.getColor()); 
+    } 
+  
+    public static void main(String[] args) 
+    { 
+        Dog tuffy = new Dog("tuffy","papillon", 5, "white"); 
+        System.out.println(tuffy.toString()); 
+    } 
+} 
+ 
 3.Inheritence
+Inheritance is an important pillar of OOP(Object Oriented Programming). It is the mechanism in java by which one class is allow to inherit the features(fields and methods) of another class.
+Important terminology:
+ - Super Class: The class whose features are inherited is known as super class(or a base class or a parent class).
+ - Sub Class: The class that inherits the other class is known as sub class(or a derived class, extended class, or child class). The subclass can add its own fields and methods in addition to the superclass fields and methods.
+ - Reusability: Inheritance supports the concept of “reusability”, i.e. when we want to create a new class and there is already a class that includes some of the code that we want, we can derive our new class from the existing class. By doing this, we are reusing the fields and methods of the existing class.
+sample :
+//Java program to illustrate the  
+// concept of inheritance 
+  
+// base class 
+class Bicycle  
+{ 
+    // the Bicycle class has two fields 
+    public int gear; 
+    public int speed; 
+          
+    // the Bicycle class has one constructor 
+    public Bicycle(int gear, int speed) 
+    { 
+        this.gear = gear; 
+        this.speed = speed; 
+    } 
+          
+    // the Bicycle class has three methods 
+    public void applyBrake(int decrement) 
+    { 
+        speed -= decrement; 
+    } 
+          
+    public void speedUp(int increment) 
+    { 
+        speed += increment; 
+    } 
+      
+    // toString() method to print info of Bicycle 
+    public String toString()  
+    { 
+        return("No of gears are "+gear 
+                +"\n"
+                + "speed of bicycle is "+speed); 
+    }  
+} 
+  
+// derived class 
+class MountainBike extends Bicycle  
+{ 
+      
+    // the MountainBike subclass adds one more field 
+    public int seatHeight; 
+  
+    // the MountainBike subclass has one constructor 
+    public MountainBike(int gear,int speed, 
+                        int startHeight) 
+    { 
+        // invoking base-class(Bicycle) constructor 
+        super(gear, speed); 
+        seatHeight = startHeight; 
+    }  
+          
+    // the MountainBike subclass adds one more method 
+    public void setHeight(int newValue) 
+    { 
+        seatHeight = newValue; 
+    }  
+      
+    // overriding toString() method 
+    // of Bicycle to print more info 
+    @Override
+    public String toString() 
+    { 
+        return (super.toString()+ 
+                "\nseat height is "+seatHeight); 
+    } 
+      
+} 
+  
+// driver class 
+public class Test  
+{ 
+    public static void main(String args[])  
+    { 
+          
+        MountainBike mb = new MountainBike(3, 100, 25); 
+        System.out.println(mb.toString()); 
+              
+    } 
+} 
+
 4.Encapsulation
+Encapsulation is defined as the wrapping up of data under a single unit. It is the mechanism that binds together code and the data it manipulates.Other way to think about encapsulation is, it is a protective shield that prevents the data from being accessed by the code outside this shield.
+Technically in encapsulation, the variables or data of a class is hidden from any other class and can be accessed only through any member function of own class in which they are declared.
+As in encapsulation, the data in a class is hidden from other classes, so it is also known as data-hiding.
+Encapsulation can be achieved by: Declaring all the variables in the class as private and writing public methods in the class to set and get the values of variables.
+public class Encapsulate 
+{ 
+    // private variables declared  
+    // these can only be accessed by  
+    // public methods of class 
+    private String geekName; 
+    private int geekRoll; 
+    private int geekAge; 
+  
+    // get method for age to access  
+    // private variable geekAge 
+    public int getAge()  
+    { 
+      return geekAge; 
+    } 
+   
+    // get method for name to access  
+    // private variable geekName 
+    public String getName()  
+    { 
+      return geekName; 
+    } 
+      
+    // get method for roll to access  
+    // private variable geekRoll 
+    public int getRoll()  
+    { 
+       return geekRoll; 
+    } 
+   
+    // set method for age to access  
+    // private variable geekage 
+    public void setAge( int newAge) 
+    { 
+      geekAge = newAge; 
+    } 
+   
+    // set method for name to access  
+    // private variable geekName 
+    public void setName(String newName) 
+    { 
+      geekName = newName; 
+    } 
+      
+    // set method for roll to access  
+    // private variable geekRoll 
+    public void setRoll( int newRoll)  
+    { 
+      geekRoll = newRoll; 
+    } 
+} 
 5.Polymorphism
-6.Abstraction
-7.Method
+The word polymorphism means having many forms. 
+In simple words, we can define polymorphism as the ability of a message to be displayed in more than one form.
+ - Override
+ class Animal {
+  public void animalSound() {
+    System.out.println("The animal makes a sound");
+  }
+}
+
+class Pig extends Animal {
+  public void animalSound() {
+    System.out.println("The pig says: wee wee");
+  }
+}
+
+class Dog extends Animal {
+  public void animalSound() {
+    System.out.println("The dog says: bow wow");
+  }
+}
+
+class MyMainClass {
+  public static void main(String[] args) {
+    Animal myAnimal = new Animal();  // Create a Animal object
+    Animal myPig = new Pig();  // Create a Pig object
+    Animal myDog = new Dog();  // Create a Dog object
+    myAnimal.animalSound();
+    myPig.animalSound();
+    myDog.animalSound();
+  }
+}
+ - Overload
+ class MultiplyFun { 
+  
+    // Method with 2 parameter 
+    static int Multiply(int a, int b) 
+    { 
+        return a * b; 
+    } 
+  
+    // Method with the same name but 2 double parameter 
+    static double Multiply(double a, double b) 
+    { 
+        return a * b; 
+    } 
+} 
+  
+class Main { 
+    public static void main(String[] args) 
+    { 
+  
+        System.out.println(MultiplyFun.Multiply(2, 4)); 
+  
+        System.out.println(MultiplyFun.Multiply(5.5, 6.3)); 
+    } 
+} 
+
